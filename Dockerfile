@@ -1,2 +1,9 @@
 FROM ace-server-prod:latest-amd64
-COPY cp4ijava.bar /home/aceuser/initial-config/bars/cp4ijava.bar
+USER root
+COPY jgr-cp4i-aceivt.bar /home/aceuser/bars
+RUN  chmod -R ugo+rwx /home/aceuser
+USER 1000
+RUN ace_compile_bars.sh
+USER root
+RUN  chmod -R ugo+rwx /home/aceuser
+USER 1000
